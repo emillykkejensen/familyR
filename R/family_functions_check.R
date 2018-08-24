@@ -2,9 +2,9 @@ family_functions_check <- function(graph_dt, is_family_data = FALSE, verbose = F
 
   if(is_family_data){
 
-    if(!all(names(graph_dt) %in% c("nodes", "edges"))) stop("You need to add a list of two data.tables called nodes and edges")
+    if(!all(c("nodes", "edges") %in% names(graph_dt))) stop("You need to add a list of two data.tables called nodes and edges")
 
-    if(!all(names(graph_dt$nodes) %in% c("name", "level"))) stop("Nodes data.tables needs to have both name and level")
+    if(!all(c("name", "level") %in% names(graph_dt$nodes))) stop("Nodes data.tables needs to have both name and level")
 
     graph_dt$edges <- family_functions_check(graph_dt$edges, is_family_data = FALSE, verbose = verbose)
 
