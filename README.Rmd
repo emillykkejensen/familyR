@@ -1,0 +1,100 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# familyR
+
+The goal of familyR is to provide a fast way to get all parents, children and even the entire family tree of a node. It uses nothing but data.table and hence it is fast!
+
+## Installation
+
+You can install familyR from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("emillykkejensen/familyR")
+
+
+```
+
+## Example
+
+First load the package - note, that familyR relies hevyly on the data.table package.
+
+```{r}
+
+library(familyR)
+
+```
+
+To use familyR you need a data.table of relations like so:
+
+```{r}
+my_network <- data.table::data.table(
+  source = c("A", "A", "B", "B", "C", "C", "X", "Y"),
+  target = c("B", "C", "D", "E", "E", "B", "Y", "Z")
+)
+
+```
+
+Note that in order for it to work, you need to name the two columns "source" and "target" - you can include others if you like, as long as you have source and target!
+
+Now let's try to get the entire family tree of node B.
+
+```{r}
+
+my_familytree <- get_familytree(my_network, "B")
+
+print(my_familytree$nodes)
+
+print(my_familytree$edges)
+
+```
+
+If we on the other hand only want the parents of a node, use get_parents()
+
+```{r}
+
+my_parents <- get_parents(my_network, "D")
+
+print(my_parents$nodes)
+
+print(my_parents$edges)
+
+```
+
+As you can see the function not only returns the parents of a node, but also the grandparents, grand grandparents etc. and the function even includes the level (or number of generations) between the node you are looking for (in this case "D") and the other parent nodes in the family. 
+
+Parents are given a negative value in level, whereas children are given a positive value.
+
+```{r}
+
+my_children <- get_children(my_network, "A")
+
+print(my_children$nodes)
+
+print(my_children$edges)
+
+```
+
+If you would like to remove inner relations for your parents or children, you can use the remove_inner_relations() function.
+
+```{r}
+
+my_new_children <- remove_inner_relations(my_children)
+
+print(my_new_children$edges)
+
+```
+
+
