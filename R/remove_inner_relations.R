@@ -34,8 +34,8 @@ remove_inner_relations <- function(graph_dt){
 
   graph_dt <- family_functions_check(graph_dt, is_family_data = TRUE, verbose = TRUE)
 
-  edges <- graph_dt$edges
-  nodes <- graph_dt$nodes
+  edges <- copy(graph_dt$edges)
+  nodes <- copy(graph_dt$nodes)
 
   edges <- edges[source != target]
 
