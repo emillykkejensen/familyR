@@ -32,6 +32,13 @@ my_network <- data.table::data.table(
   target = c("B", "C", "D", "E", "Y", "Z")
 )
 
-my_family <- get_familytree(my_network, "B")
+# -------------------------------
+get_familytree(my_network, "B")
+
+
+# -------------------------------
+get_familytree(my_network, "X")
+
+
 
 }

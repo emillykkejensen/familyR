@@ -21,7 +21,14 @@
 #'   target = c("B", "C", "D", "E", "Y", "Z")
 #' )
 #'
-#' my_family <- get_familytree(my_network, "B")
+#' # -------------------------------
+#' get_familytree(my_network, "B")
+#'
+#'
+#' # -------------------------------
+#' get_familytree(my_network, "X", return_nodes = FALSE)
+#'
+#'
 #'
 #' @export
 get_familytree <- function(graph_dt, get_node, return_nodes = TRUE){
