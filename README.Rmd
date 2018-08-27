@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 The goal of familyR is to provide a fast way to get all parents, children and even the entire family tree of a node. It uses nothing but data.table and hence it is fast!
 
 familyR consists of tree main functions:
-1: get_familytree
-2: get_parents
-3: get_children
+1. get_familytree
+2. get_parents
+3. get_children
 
 familyR is built so it is easy to visualize with visNetwork's hierarchical layout as both get_parents and get_children include the number of levels (or generations if you will), there are between the node you are looking and other nodes in the family.
 
@@ -64,7 +64,7 @@ print(my_familytree$edges)
 
 To show this with visNetwork all you need is:
 
-```{r}
+```{r eval=FALSE}
 library(visNetwork)
 
 visNetwork(my_familytree$nodes, my_familytree$edges) %>%
@@ -87,7 +87,7 @@ Parents are given a negative value in level, whereas children are given a positi
 
 To use this with visNetwork simply run:
 
-```{r}
+```{r eval=FALSE}
 visNetwork(my_parents$nodes, my_parents$edges) %>% 
   visEdges(arrows = "to") %>%
   visHierarchicalLayout()
@@ -103,7 +103,7 @@ print(my_children$nodes)
 print(my_children$edges)
 ```
 
-```{r}
+```{r eval=FALSE}
 visNetwork(my_children$nodes, my_children$edges) %>% 
     visEdges(arrows = "to") %>%
     visHierarchicalLayout()
@@ -123,7 +123,7 @@ print(my_family$nodes)
 print(my_family$edges)
 ```
 
-```{r}
+```{r eval=FALSE}
 visNetwork(my_family$nodes, my_family$edges) %>% 
     visEdges(arrows = "to") %>%
     visHierarchicalLayout()
@@ -131,7 +131,7 @@ visNetwork(my_family$nodes, my_family$edges) %>%
 
 As you can see, some nodes are internally related (node B and E). If you would like to remove those inner relations use the remove_inner_relations() function.
 
-```{r}
+```{r eval=FALSE}
 my_new_family <- remove_inner_relations(my_family)
 
 visNetwork(my_new_family$nodes, my_new_family$edges) %>% 
