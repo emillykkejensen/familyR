@@ -3,4 +3,5 @@
 export(get_children)
 export(get_familytree)
 export(get_parents)
+export(merge_family)
 export(remove_inner_relations)

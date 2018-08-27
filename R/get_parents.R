@@ -2,10 +2,10 @@
 #'
 #' get_parents() returns all parents, grandparents, grand grandparents, etc. of your input node.
 #'
-#' The function takes as its input a data.table (graph_dt) with at least two columns called "source" and "target" and potentially many more.
+#' The function takes as its input a data.table (graph_dt) with at least two columns called "from" and "to" and potentially many more.
 #'
 #'
-#' @param graph_dt data.table; A data.table with a "source" and a "target" column. See details for more.
+#' @param graph_dt data.table; A data.table with a "from" and a "to" column. See details for more.
 #' @param get_node character; The name of the node(s) who's parents you are looking for
 #' @param return_nodes logical; If TRUE (default) the function will return both
 #' the inputted graph_dt along with a nodes data.table. See return for more.
@@ -19,8 +19,8 @@
 #'
 #' @examples
 #' my_network <- data.table::data.table(
-#'   source = c("A", "A", "B", "C", "X", "Y", "D"),
-#'   target = c("B", "C", "D", "E", "Y", "Z", "E")
+#'   from = c("A", "A", "B", "C", "X", "Y", "D"),
+#'   to = c("B", "C", "D", "E", "Y", "Z", "E")
 #' )
 #'
 #' my_parents <- get_parents(my_network, "B")
@@ -36,11 +36,11 @@ get_parents <- function(graph_dt, get_node, return_nodes = TRUE){
 
     relation_ids <- if(!is.null(exclude_id)){
 
-      graph_dt[(target %in% get_node) & !(id %in% exclude_id$id)]
+      graph_dt[(to %in% get_node) & !(id %in% exclude_id$id)]
 
     } else {
 
-      graph_dt[(target %in% get_node)]
+      graph_dt[(to %in% get_node)]
 
     }
 
@@ -50,7 +50,7 @@ get_parents <- function(graph_dt, get_node, return_nodes = TRUE){
 
     } else {
 
-      nodes <- list(nodes = unique(relation_ids$source),
+      nodes <- list(nodes = unique(relation_ids$from),
                     ids = data.table(id = relation_ids$id, level = level))
 
       new_exclude_id <- if(is.null(exclude_id)) nodes$ids else rbind(nodes$ids, exclude_id)

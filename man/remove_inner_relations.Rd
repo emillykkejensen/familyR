@@ -7,7 +7,7 @@
 remove_inner_relations(graph_dt)
 }
 \arguments{
-\item{graph_dt}{data.table; A data.table with a "source", a "target" and a "level" column. See details for more.}
+\item{graph_dt}{data.table; A data.table with a "from", a "to" and a "level" column. See details for more.}
 }
 \value{
 It will return the inputted graph_dt data.table but with all
@@ -17,13 +17,13 @@ inner relations removed. See examples.
 remove_inner_relations() removes all inner relations in a network - see examples for more...
 }
 \details{
-The function takes as its input a graph_dt from either get_parents() or get_children() with at least three columns called "source", "target" and "level" potentially many more.
+The function takes as its input a graph_dt from either get_parents() or get_children() with at least three columns called "from", "to" and "level" potentially many more.
 }
 \examples{
 
 my_network <- data.table::data.table(
-  source = c("A", "B", "B", "C", "C", "E"),
-  target = c("B", "C", "D", "E", "B", "A")
+  from = c("A", "B", "B", "C", "C", "E"),
+  to = c("B", "C", "D", "E", "B", "A")
 )
 
 # -------------------------------

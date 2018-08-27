@@ -7,7 +7,7 @@
 get_familytree(graph_dt, get_node, return_nodes = TRUE)
 }
 \arguments{
-\item{graph_dt}{data.table; A data.table with a "source" and a "target" column. See details for more.}
+\item{graph_dt}{data.table; A data.table with a "from" and a "to" column. See details for more.}
 
 \item{get_node}{character; The name of the node(s) who's family tree you want}
 
@@ -24,12 +24,12 @@ get_familytree() returns all nodes even remotely connected to your input node.
 So not only will it return all parents, grandparents, grand grandparents, etc., children, grandchildren, grand grandchildren, etc., but also the parents, grandparents and so on for those parents and children.
 }
 \details{
-The function takes as its input a data.table (graph_dt) with at least two columns called "source" and "target" and potentially many more.
+The function takes as its input a data.table (graph_dt) with at least two columns called "from" and "to" and potentially many more.
 }
 \examples{
 my_network <- data.table::data.table(
-  source = c("A", "A", "B", "C", "X", "Y"),
-  target = c("B", "C", "D", "E", "Y", "Z")
+  from = c("A", "A", "B", "C", "X", "Y"),
+  to = c("B", "C", "D", "E", "Y", "Z")
 )
 
 # -------------------------------
@@ -37,7 +37,7 @@ get_familytree(my_network, "B")
 
 
 # -------------------------------
-get_familytree(my_network, "X")
+get_familytree(my_network, "X", return_nodes = FALSE)
 
 
 
