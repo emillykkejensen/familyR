@@ -19,8 +19,8 @@ You can install familyR from github with:
 devtools::install_github("emillykkejensen/familyR")
 ```
 
-Example
--------
+How to use familyR
+------------------
 
 First load the package - note, that familyR relies heavily on data.table.
 
@@ -35,16 +35,18 @@ To use familyR you need a data.table of relations:
 ``` r
 my_network <- data.table::data.table(
   from = c("A", "A", "B", "B", "C", "C", "X", "Y"),
-  to = c("B", "C", "D", "E", "E", "B", "Y", "Z")
+  to   = c("B", "C", "D", "E", "E", "B", "Y", "Z")
 )
 ```
 
 Note that in order for it to work, you need to name the two columns "from" and "to" - you can include others if you like, as long as you have from and to!
 
+### The main functions
+
 Now let's try to get the entire family tree of node B.
 
 ``` r
-my_familytree <- get_familytree(my_network, "B")
+my_familytree <- get_familytree(my_network, "C")
 
 print(my_familytree$nodes)
 #>    id
@@ -64,6 +66,10 @@ print(my_familytree$edges)
 #> 6:    C  B
 ```
 
+As you can see the function not only returns the entire family tree of a node B, but also the level (or number of generations) between the node you are looking for (in this case "B") and the other nodes in the family.
+
+By looking at the level column we can see, that node C is directly related to node A, E and B and is related in second generation with node D.
+
 To show this with visNetwork all you need is:
 
 ``` r
@@ -73,7 +79,7 @@ visNetwork(my_familytree$nodes, my_familytree$edges) %>%
   visEdges(arrows = "to")
 ```
 
-If we on the other hand only want the parents of a node, use get\_parents()
+If we are not interested in the entire family tree, but only want the parents of a node use get\_parents()
 
 ``` r
 my_parents <- get_parents(my_network, "D")
@@ -93,48 +99,15 @@ print(my_parents$edges)
 #> 4:    C  B
 ```
 
-As you can see the function not only returns the parents of a node, but also the grandparents, grand grandparents etc. and the function even includes the level (or number of generations) between the node you are looking for (in this case "D") and the other parent nodes in the family.
+get\_parents() not only returns the parents of a node, but also the grandparents, grand grandparents etc.
 
-Parents are given a negative value in level, whereas children are given a positive value.
+As with get\_familytree() this function also returns both the node id and the level, but here you'll notice that the levels are given a negative value. This is to show the direction of the generation and comes in handy if you want to merge with get\_children().
 
-To use this with visNetwork simply run:
+To get all children of a node use get\_children(). This works exactly like get\_parents(), but returns levels in positive numbers.
 
-``` r
-visNetwork(my_parents$nodes, my_parents$edges) %>% 
-  visEdges(arrows = "to") %>%
-  visHierarchicalLayout()
-```
+### Combining functions
 
-To get all children of a node, use get\_children()
-
-``` r
-my_children <- get_children(my_network, "A")
-
-print(my_children$nodes)
-#>    id level
-#> 1:  A     0
-#> 2:  B     1
-#> 3:  C     1
-#> 4:  D     2
-#> 5:  E     2
-
-print(my_children$edges)
-#>    from to
-#> 1:    A  B
-#> 2:    A  C
-#> 3:    B  D
-#> 4:    B  E
-#> 5:    C  E
-#> 6:    C  B
-```
-
-``` r
-visNetwork(my_children$nodes, my_children$edges) %>% 
-    visEdges(arrows = "to") %>%
-    visHierarchicalLayout()
-```
-
-To show both parents and children combine the two functions with merge\_family.
+Id you don't want the entire family tree of a node, but would like to get both parents and children you can combine them using merge\_family()
 
 ``` r
 my_parents <- get_parents(my_network, "C")
@@ -160,18 +133,41 @@ print(my_family$edges)
 #> 5:    C  B
 ```
 
-``` r
-visNetwork(my_family$nodes, my_family$edges) %>% 
-    visEdges(arrows = "to") %>%
-    visHierarchicalLayout()
-```
+This will give you both parents (with a negative level value) and children (with a positive level value) of node C.
 
-As you can see, some nodes are internally related (node B and E). If you would like to remove those inner relations use the remove\_inner\_relations() function.
+As you can see from my\_family$edges, some nodes are internally related (node B and E). If you would like to show, only direct relations to node C and thus remove those inner relations, use the remove\_inner\_relations() function.
 
 ``` r
 my_new_family <- remove_inner_relations(my_family)
 
+print(my_new_family$nodes)
+#>    id level
+#> 1:  A    -1
+#> 2:  C     0
+#> 3:  B     1
+#> 4:  E     1
+#> 5:  D     2
+
+print(my_new_family$edges)
+#>    from to
+#> 1:    A  C
+#> 2:    B  D
+#> 3:    C  E
+#> 4:    C  B
+```
+
+Now you can use my\_new\_family with visNetwork's visHierarchicalLayout function, that uses the level column.
+
+``` r
 visNetwork(my_new_family$nodes, my_new_family$edges) %>% 
     visEdges(arrows = "to") %>%
     visHierarchicalLayout()
+```
+
+### Nice to know
+
+familyR uses data.table and thus builds on the principle of changing input by reference. Therefor you need to specify, that you want to copy data from on data.table to another insted of just creating a new reference. To do this, use the copy\_family() function.
+
+``` r
+my_copied_family <- copy_family(my_new_family)
 ```

@@ -10,8 +10,8 @@ family_functions_check <- function(graph_dt, is_family_data = FALSE, verbose = F
 
   } else {
 
-    if(!is.data.table(graph_dt)){
-      graph_dt <- as.data.table(graph_dt)
+    if(!data.table::is.data.table(graph_dt)){
+      graph_dt <- data.table::as.data.table(graph_dt)
       if(verbose) warning("I feel the need... The need for speed! Set graph_dt as data.table by default and we won't have to do it.")
     }
 
@@ -19,7 +19,7 @@ family_functions_check <- function(graph_dt, is_family_data = FALSE, verbose = F
 
     if(!("id" %in% names(graph_dt))) graph_dt[, id := .I]
 
-    if(uniqueN(graph_dt, by = "id") != nrow(graph_dt)) stop("id needs to be unique")
+    if(data.table::uniqueN(graph_dt, by = "id") != nrow(graph_dt)) stop("id needs to be unique")
 
   }
 

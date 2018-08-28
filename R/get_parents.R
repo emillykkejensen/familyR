@@ -10,11 +10,12 @@
 #' @param return_nodes logical; If TRUE (default) the function will return both
 #' the inputted graph_dt along with a nodes data.table. See return for more.
 #'
-#' @return It will return the inputted graph_dt data.table but only with parents
-#' included.
+#' @return It will return the inputted graph_dt data.table but only with parents included.
+#'
 #' If return_nodes is TRUE it will also retun a data.table with node ids including a
 #' column called level showing you how many generations there are between the diffent nodes
 #' and the inputted node (get_node).
+#'
 #' When return_nodes is TRUE it returns both data.tables in a list called nodes and edges.
 #'
 #' @examples

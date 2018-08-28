@@ -15,13 +15,19 @@ get_familytree(graph_dt, get_node, return_nodes = TRUE)
 the inputted graph_dt along with a nodes data.table. See return for more.}
 }
 \value{
-It will return the inputted graph_dt data.table but only with family
-members included. If return_nodes is TRUE it will also retun a data.table with
-node ids and wrap the both in a list called nodes and edges.
+It will return the inputted graph_dt data.table but only with family members included.
+
+If return_nodes is TRUE it will also retun a data.table with node ids including a
+column called level showing you how many generations there are between the diffent nodes
+and the inputted node (get_node).
+
+When return_nodes is TRUE it returns both data.tables in a list called nodes and edges.
 }
 \description{
 get_familytree() returns all nodes even remotely connected to your input node.
-So not only will it return all parents, grandparents, grand grandparents, etc., children, grandchildren, grand grandchildren, etc., but also the parents, grandparents and so on for those parents and children.
+So not only will it return all parents, grandparents, grand grandparents, etc.,
+children, grandchildren, grand grandchildren, etc., but also the parents, grandparents
+and so on for those parents and children.
 }
 \details{
 The function takes as its input a data.table (graph_dt) with at least two columns called "from" and "to" and potentially many more.

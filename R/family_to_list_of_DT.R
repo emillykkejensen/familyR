@@ -5,9 +5,14 @@ family_to_list_of_DT <- function(graph_dt, relation_dt, return_nodes, type){
 
   if(return_nodes){
 
+    nodes <- rbind(graph_dt[, .(id = id, name = from)], graph_dt[, .(id = id, name = to)])
+
     if(type == "get_familytree"){
 
-      nodes <- data.table(id = unique(c(edges$from, edges$to)))
+      nodes <- merge(graph_dt, relation_dt, by = "id", all.y = TRUE)
+      nodes <- rbind(nodes[, .(id = from, level)], nodes[, .(id = to, level)]) %>%
+        setorder(level) %>%
+        unique(by = "id")
 
     } else {
 

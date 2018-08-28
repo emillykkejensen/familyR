@@ -18,7 +18,7 @@ Copy one list of familyR data to another.
 \details{
 As familyR relies on data.table it also builds on the principle of changing input
 by reference. Therefor you need to specify, that you want to copy data from on data.table
-to another insted of just referencing. This is, what the copy_family does.
+to another insted of just creating a new reference. This is, what the copy_family does.
 }
 \examples{
 my_network <- data.table::data.table(
