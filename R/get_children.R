@@ -67,15 +67,13 @@ get_children <- function(graph_dt, get_node, return_nodes = TRUE){
 
   }
 
-  parents <- inhouse_get_children(graph_dt = graph_dt, get_node = get_node)
+  children <- inhouse_get_children(graph_dt = graph_dt, get_node = get_node)
 
-  if(!is.null(parents)){
-    parents <- family_to_list_of_DT(graph_dt = graph_dt,
-                                    relation_dt = parents,
-                                    return_nodes = return_nodes,
-                                    type = "get_children")
-  }
+  children <- family_to_list_of_DT(graph_dt = graph_dt,
+                                   relation_dt = children,
+                                   return_nodes = return_nodes,
+                                   type = "get_children")
 
-  return(parents)
+  return(children)
 
 }

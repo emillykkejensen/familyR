@@ -75,14 +75,14 @@ get_familytree <- function(graph_dt, get_node, return_nodes = TRUE){
 
   }
 
-  familytree_dt <- inhouse_get_familytree(graph_dt = graph_dt, get_node = get_node)
+  familytree <- inhouse_get_familytree(graph_dt = graph_dt, get_node = get_node)
 
-  family <- family_to_list_of_DT(graph_dt = graph_dt,
-                                 relation_dt = familytree_dt,
-                                 return_nodes = return_nodes,
-                                 type = "get_familytree")
+  familytree <- family_to_list_of_DT(graph_dt = graph_dt,
+                                     relation_dt = familytree,
+                                     return_nodes = return_nodes,
+                                     type = "get_familytree")
 
-  if(return_nodes & !is.null(family)) family$nodes[id %in% get_node, level := 0] %>% setorder(level)
+  if(return_nodes & !is.null(familytree)) familytree$nodes[id %in% get_node, level := 0] %>% setorder(level)
 
-  return(family)
+  return(familytree)
 }
