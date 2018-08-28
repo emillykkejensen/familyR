@@ -82,7 +82,7 @@ get_familytree <- function(graph_dt, get_node, return_nodes = TRUE){
                                  return_nodes = return_nodes,
                                  type = "get_familytree")
 
-  family$nodes[id %in% get_node, level := 0] %>% setorder(level)
+  if(return_nodes) family$nodes[id %in% get_node, level := 0] %>% setorder(level)
 
   return(family)
 }
