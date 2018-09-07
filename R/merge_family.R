@@ -27,9 +27,9 @@ merge_family <- function(...){
 
   list_of_edges <- lapply(seq(list_of_family), function(x) list_of_family[[x]]$edges)
 
-  merged_nodes <- data.table::rbindlist(list_of_nodes, use.names = TRUE, fill = TRUE) %>%
-    unique() %>%
-    data.table::setorder(level)
+  merged_nodes <- data.table::rbindlist(list_of_nodes, use.names = TRUE, fill = TRUE)
+
+  if(nrow(merged_nodes) > 0) merged_nodes <- unique(merged_nodes) %>% data.table::setorder(level)
 
   merged_edges <- data.table::rbindlist(list_of_edges, use.names = TRUE, fill = TRUE)
 
