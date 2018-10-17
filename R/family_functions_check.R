@@ -1,3 +1,4 @@
+#' @import data.table
 family_functions_check <- function(graph_dt, is_family_data = FALSE, verbose = FALSE){
 
   if(is_family_data){

@@ -29,6 +29,8 @@
 #' remove_inner_relations(my_parents)
 #'
 #'
+#' @import data.table
+#'
 #' @export
 remove_inner_relations <- function(graph_dt){
 

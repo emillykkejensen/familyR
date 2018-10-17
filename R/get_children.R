@@ -27,6 +27,8 @@
 #'
 #' my_children <- get_children(my_network, "X", return_nodes = FALSE)
 #'
+#' @import data.table
+#'
 #' @export
 get_children <- function(graph_dt, get_node, return_nodes = TRUE){
 

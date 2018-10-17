@@ -18,6 +18,8 @@
 #'
 #' merged_family <- merge_family(my_parents, my_children)
 #'
+#' @import data.table magrittr
+#'
 #' @export
 merge_family <- function(...){
 

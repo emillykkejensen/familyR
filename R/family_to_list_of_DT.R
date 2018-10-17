@@ -1,3 +1,4 @@
+#' @import data.table
 family_to_list_of_DT <- function(graph_dt, relation_dt, return_nodes, type){
 
   if(is.null(relation_dt)){

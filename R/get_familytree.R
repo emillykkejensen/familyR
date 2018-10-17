@@ -36,6 +36,8 @@
 #'
 #'
 #'
+#' @import data.table
+#'
 #' @export
 get_familytree <- function(graph_dt, get_node, return_nodes = TRUE){
 

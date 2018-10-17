@@ -28,6 +28,8 @@
 #'
 #' my_parents <- get_parents(my_network, "E", return_nodes = FALSE)
 #'
+#' @import data.table
+#'
 #' @export
 get_parents <- function(graph_dt, get_node, return_nodes = TRUE){
 

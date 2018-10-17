@@ -20,6 +20,8 @@
 #'
 #' my_copied_family <- copy_family(my_family)
 #'
+#' @import data.table
+#'
 #' @export
 copy_family <- function(graph_dt){
 
