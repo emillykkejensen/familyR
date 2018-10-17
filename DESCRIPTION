@@ -2,7 +2,7 @@ Package: familyR
 Type: Package
 Title: Fast family functions for your graph data
 Version: 1.0
-Author: person("Emil", "Lykke Jensen", email = "emil@emillykkejensen.dk", role = c("aut", "cre"))
+Author: Emil Lykke Jensen <emil@emillykkejensen.dk>
 Maintainer: Emil Lykke Jensen <emil@emillykkejensen.dk>
 Description: familyR provides a fast way to get all parents, children and even the entire family tree of a node. It uses nothing but data.table and hence it is fast!
 License: GPL-3 | file LICENSE
