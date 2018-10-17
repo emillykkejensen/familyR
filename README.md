@@ -1,5 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/emillykkejensen/familyR.svg?branch=master)](https://travis-ci.org/emillykkejensen/familyR)
+
 familyR
 =======
 
@@ -49,12 +51,12 @@ Now let's try to get the entire family tree of node B.
 my_familytree <- get_familytree(my_network, "C")
 
 print(my_familytree$nodes)
-#>    id
-#> 1:  A
-#> 2:  B
-#> 3:  C
-#> 4:  D
-#> 5:  E
+#>    id level
+#> 1:  C     0
+#> 2:  A     1
+#> 3:  E     1
+#> 4:  B     1
+#> 5:  D     2
 
 print(my_familytree$edges)
 #>    from to
