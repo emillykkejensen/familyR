@@ -1,6 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/emillykkejensen/familyR.svg?branch=master)](https://travis-ci.org/emillykkejensen/familyR)
+<!-- badges: start -->
+[![Travis-CI Build Status](https://travis-ci.org/emillykkejensen/familyR.svg?branch=master)](https://travis-ci.org/emillykkejensen/familyR) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) <!-- badges: end -->
 
 familyR
 =======
@@ -109,7 +110,7 @@ To get all children of a node use get\_children(). This works exactly like get\_
 
 ### Combining functions
 
-Id you don't want the entire family tree of a node, but would like to get both parents and children you can combine them using merge\_family()
+If you don't want the entire family tree of a node, but would like to get both parents and children you can combine them using merge\_family()
 
 ``` r
 my_parents <- get_parents(my_network, "C")
