@@ -9,4 +9,6 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: data.table, magrittr
+URL: https://github.com/emillykkejensen/familyR/
+BugReports: https://github.com/emillykkejensen/familyR/issues
 RoxygenNote: 6.1.0
